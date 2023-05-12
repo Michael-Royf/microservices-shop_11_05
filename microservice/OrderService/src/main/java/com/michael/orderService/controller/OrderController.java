@@ -1,13 +1,11 @@
 package com.michael.orderService.controller;
 
 import com.michael.orderService.payload.request.OrderRequest;
+import com.michael.orderService.payload.response.OrderResponse;
 import com.michael.orderService.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -22,6 +20,12 @@ public class OrderController {
     public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest) {
         return new ResponseEntity<>(orderService.placeOrder(orderRequest), OK);
     }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable("orderId") Long orderId){
+        return new ResponseEntity<>(orderService.getOrderDetailsById(orderId), OK);
+    }
+
 
 
 }
